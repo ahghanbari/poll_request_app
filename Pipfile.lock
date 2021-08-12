@@ -1,0 +1,21 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "38340ec2d969c549b59c4e2d16be512f8294497d33c3150d228bc1f52ccd1c12"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "django_version": "3.1",
+            "python_version": "3.8"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {},
+    "develop": {}
+}
