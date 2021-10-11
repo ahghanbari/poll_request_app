@@ -10,7 +10,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'polls:index'%}">question_list</a>
+    <a class="navbar-brand" href="{% url 'polls:index'%}">question list</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -28,7 +28,8 @@
       </ul>
     </div>
     {% if user.is_authenticated %}
-        <p><a href="{% url 'logout' %}">Log out</a></p>
+      <p>Hello {{user.username}} </p>
+        <p>, <a href="{% url 'logout' %}">Log out</a></p>
     {% else %}
         <a href="{% url 'login' %}">Log In</a>
         <a href="{% url 'signup' %}"> Signup</a>

@@ -101,7 +101,7 @@ def vote(request, question_id):
         user = request.user
         exist = question.users.all()
         if user in exist:
-            return HttpResponse  ("<h1> you vote once </h1>")
+            return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
         else:
             selected_choice.votes += 1
             selected_choice.save()
