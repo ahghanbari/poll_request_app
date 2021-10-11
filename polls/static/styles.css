@@ -1,0 +1,93 @@
+*,
+::after,
+::before {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+list-container{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+
+.todo-list-container {
+    width: 100%;
+}
+
+.todo-list {
+    min-height: 60vh;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.todo-item-content {
+    display: flex;
+}
+
+.todo-item-content input {
+    margin-right: 10px;
+}
+
+.job-text h6{
+    font-size: 17px;
+    margin: 1px 0;
+    margin-left: 40px;
+}
+
+.job-text p{
+    font-size:11px;
+    margin: 1px 0;
+    margin-left :40px;
+}
+
+.job-done-text {
+    text-decoration: line-through 1px;
+    font-weight: normal;
+    color: #919191;
+}
+
+.job-done-input :checked{
+    background-color: #8c8c8c;
+}
+
+.todo-item-action {
+    display: flex;
+}
+
+.todo-item-action a{
+    margin-right:5px;
+}
+
+.create-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 300px;
+    width: 70%;
+    padding-top: 30px;
+}
+
+.create-todo-form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.helper-text {
+    font-size: 13px;
+    color: #919191;
+}
