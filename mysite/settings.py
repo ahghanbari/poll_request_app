@@ -11,7 +11,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    # internal app
     'polls.apps.PollsConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -84,3 +86,16 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+
+LOGIN_REDIRECT_URL = 'polls:index'
+LOGOUT_REDIRECT_URL = 'polls:index'
+
+
+
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+#     'account.authentication.EmailAuthBackend',
+#     'social_core.backends.twitter.TwitterOAuth',
+#     'social_core.backends.google.GoogleOAuth2',
+# ]
+

@@ -1,12 +1,17 @@
 
 import datetime
+from django.core.exceptions import AppRegistryNotReady
 #from django.template import loader
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect #HttpResponse, Http404, 
-from django.urls import reverse
+from django.http import HttpResponseRedirect , HttpResponse , Http404  
+from django.urls import reverse , reverse_lazy
 from django.views import generic
 from django.utils import timezone
 from .models import Choice, Question
+from django.views.generic.edit import CreateView
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.contrib.auth.forms import UserCreationForm
 
 # def index(request):
     # latest_question_list = Question.objects.order_by('-pub_date')[:5]
@@ -21,6 +26,15 @@ from .models import Choice, Question
 #    context = {'latest_question_list': latest_question_list}
 #    return render(request, 'polls/index.html', context)
 
+
+class HomeView(generic.TemplateView):
+    template_name = 'polls/home.html'
+
+class ContactUsView(generic.TemplateView):
+    template_name = 'polls/contact_us.html'
+
+
+@method_decorator(login_required, name='get')
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
@@ -47,9 +61,12 @@ class IndexView(generic.ListView):
 #    question = get_object_or_404(Question, pk=question_id)
 #    return render(request, 'polls/detail.html', {'question': question})
 
+@method_decorator(login_required, name='get')
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
+
+    
     def get_queryset(self):
         """
         Excludes any questions that aren't published yet.
@@ -64,9 +81,11 @@ class DetailView(generic.DetailView):
 #    question = get_object_or_404(Question, pk=question_id)
 #    return render(request, 'polls/results.html', {'question': question})
 
+@method_decorator(login_required, name='get')
 class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
+
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -79,9 +98,20 @@ def vote(request, question_id):
             'error_message': "You didn't select a choice.",
         })
     else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
+        user = request.user
+        exist = question.users.all()
+        if user in exist:
+            return HttpResponse  ("<h1> you vote once </h1>")
+        else:
+            selected_choice.votes += 1
+            selected_choice.save()
+            question.users.add(user)
+            question.save()
+
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+
+class SignUpView(CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/signup.html'
